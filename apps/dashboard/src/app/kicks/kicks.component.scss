@@ -1,0 +1,11 @@
+.container {
+  height: calc(100vh - 65px);
+  overflow: hidden;
+  margin: 0;
+
+  .list-col {
+    padding: 0;
+    height: 100%;
+    overflow: scroll;
+  }
+}
