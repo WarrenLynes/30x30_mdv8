@@ -11,27 +11,35 @@ import {
   deleteSuccess,
   deleteFailure,
   save,
-  saveSuccess, saveFailure
+  saveSuccess, saveFailure, create, createSuccess, createFailure
 } from './kicks.actions';
 import { catchError, delay, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { SnackbarService } from './snackbar.service';
 
 @Injectable()
 export class KicksEffects {
+
+  snackMessages = {
+    '[KICKS][DELETE][SUCCESS]': 'Successfully Deleted',
+    '[KICKS][SAVE][SUCCESS]': 'Successfully Updated',
+    '[KICKS][CREATE][SUCCESS]': 'Successfully Created'
+  };
+
   constructor(
     private actions$: Actions,
     private service: ShoesService,
     private store: Store<State>,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {}
 
   load$ = createEffect(
     () => this.actions$.pipe(
       ofType(load),
       //DELAY TO NOTICE AWESOME PROGRESS BAR
-      delay(5000),
+      delay(1500),
       exhaustMap(() =>
         this.service.all().pipe(
           map((kicks: Shoe[]) => loadSuccess({data: kicks})),
@@ -55,6 +63,20 @@ export class KicksEffects {
     )
   );
 
+  create$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(create),
+      //DELAY TO NOTICE AWESOME PROGRESS BAR
+      delay(1500),
+      exhaustMap(({type, entity}) =>
+        this.service.create(entity).pipe(
+          map((update: Shoe) => createSuccess({entity: update})),
+          catchError(error => of(createFailure({error})))
+        )
+      )
+    )
+  );
+
   delete$ = createEffect(
     () => this.actions$.pipe(
       ofType(deleteKick),
@@ -68,23 +90,13 @@ export class KicksEffects {
     )
   );
 
-  deleteSuccess$ = createEffect(
+  onSuccess$ = createEffect(
     () => this.actions$.pipe(
-      ofType(deleteSuccess),
-      map(({type, id}) =>
-        this.router.navigateByUrl('/kicks')
-      )
-    )
-  , {dispatch: false});
-
-  saveSuccess$ = createEffect(
-    () => this.actions$.pipe(
-      ofType(saveSuccess),
-      // tap(() => this.store.dispatch(load())),
-      map(({type, entity}) => {
-        this.router.navigateByUrl('/kicks');
-        // return load();
+      ofType(deleteSuccess, saveSuccess, createSuccess),
+      map(({type}) => {
+        this.router.navigateByUrl('/kicks').then(() => {
+          this.snackbarService.openSnackBar(this.snackMessages[type])
+        })
       })
-    )
-  , {dispatch: false});
+  ), {dispatch: false});
 }

@@ -9,10 +9,13 @@ import { AppFacade } from './app.facade';
 import { KicksFacade } from './kicks.facade';
 import { AuthEffects } from './auth.effects';
 import { AuthFacade } from './auth.facade';
+import { SnackbarService } from './snackbar.service';
+import { MatSnackBarModule } from '@angular/material';
 
 
 @NgModule({
   imports: [
+    MatSnackBarModule,
     StoreModule.forRoot(reducers, {
       runtimeChecks: {
         strictStateImmutability: true,
@@ -28,7 +31,8 @@ import { AuthFacade } from './auth.facade';
   providers: [
     AppFacade,
     AuthFacade,
-    KicksFacade
+    KicksFacade,
+    SnackbarService
   ]
 })
 export class CoreStateModule {}

@@ -28,7 +28,8 @@ export class AppComponent implements OnInit{
 
   constructor(
     private facade: AppFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +39,10 @@ export class AppComponent implements OnInit{
 
   onLogout() {
     this.authFacade.logout();
+  }
+
+  goToCreate() {
+    this.router.navigateByUrl('kicks/create');
   }
 
 }

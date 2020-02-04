@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Shoe } from '@mdv8/core-data';
 import { KicksFacade } from '@mdv8/core-state';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'mdv8-list',
@@ -9,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+
+  loading$: Observable<boolean>;
+
   get data$() {
     return this.facade.kicks$;
   }
@@ -17,6 +21,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.facade.load();
+    this.loading$ = this.facade.loading$;
   }
 
   onDelete(entity: Shoe) {

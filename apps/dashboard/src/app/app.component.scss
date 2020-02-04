@@ -10,8 +10,28 @@
 }
 
 .app-content {
-  height: calc(100vh - 64px);
-  width: 100vw;
+  height: calc(100vh - 84px);
+  margin: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+// scrollbar
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: none;
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00e676;
+  border-radius: 10px;
+}
+
+.mat-progress-bar.mat-accent .mat-progress-bar-buffer {
+  background-color: green!important;
 }
 
 .mat-drawer {
@@ -33,6 +53,7 @@ nav {
   .spacer { flex: 1 1 auto; }
 }
 
+// autofill
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

@@ -52,3 +52,17 @@ export const saveFailure = createAction(
 );
 
 
+export const create = createAction(
+  '[KICKS][CREATE][REQUEST]',
+  props<{entity: Shoe}>()
+);
+export const createSuccess = createAction(
+  '[KICKS][CREATE][SUCCESS]',
+  props<{entity: Shoe}>()
+);
+export const createFailure = createAction(
+  '[KICKS][CREATE][FAILURE]',
+  props<{error: any}>()
+);
+
+

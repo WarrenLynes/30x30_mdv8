@@ -69,7 +69,6 @@ md-sidenav a {
 
 .container {
   display: flex;
-  margin: 10px;
   flex-wrap: wrap;
 }
 
@@ -249,4 +248,8 @@ mat-toolbar {
 
 .mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label {
   background-color: #424242!important;
+}
+
+.mat-progress-bar.mat-accent .mat-progress-bar-buffer {
+  background-color: #00e675!important;
 }

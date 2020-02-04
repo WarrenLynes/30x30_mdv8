@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { currentKicks, currentSelection, loading, hasCurrentKicks } from './kicks.reducer';
 import { Shoe } from '@mdv8/core-data';
 import { State } from '@mdv8/core-state';
-import { load, reset, select, deleteKick, save } from './kicks.actions';
+import { load, reset, select, deleteKick, save, create } from './kicks.actions';
 
 @Injectable()
 export class KicksFacade {
@@ -44,6 +44,10 @@ export class KicksFacade {
   }
 
   save(entity: Shoe) {
-    this.store.dispatch(save({entity}))
+    if (!entity.id) {
+      this.store.dispatch(create({entity}));
+    } else {
+      this.store.dispatch(save({entity}))
+    }
   }
 }

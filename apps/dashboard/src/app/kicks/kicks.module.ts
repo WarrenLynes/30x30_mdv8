@@ -13,18 +13,20 @@ import {
   MatSliderModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormComponent } from './form/form.component';
 
 
 
 @NgModule({
-  declarations: [DetailComponent, ListComponent, KicksComponent],
+  declarations: [DetailComponent, ListComponent, KicksComponent, FormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '', component: KicksComponent, children: [
           { path: '', component: ListComponent },
-          { path: ':id', component: DetailComponent }
+          { path: 'create', component: FormComponent },
+          { path: ':id', component: DetailComponent },
         ]
       }
     ]),

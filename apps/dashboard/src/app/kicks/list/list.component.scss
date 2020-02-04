@@ -1,14 +1,15 @@
 mat-list-item.mat-list-item:hover { background: #212121; }
 
 .container {
-  height: calc(100vh - 85px);
-  overflow: hidden;
-  overflow-y: scroll;
   justify-content: space-around;
   align-items: flex-start;
 }
 
 .mat-card {
-  width: 25vw;
+  min-width: 25vw;
+  min-height: 20vh;
+  h1.boom {
+    font-size: 11em;
+  }
 }
 

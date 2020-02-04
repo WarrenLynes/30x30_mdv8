@@ -11,8 +11,6 @@ import { KicksFacade } from '@mdv8/core-state';
   styleUrls: ['./kicks.component.scss']
 })
 export class KicksComponent implements OnInit {
-
-  loading$: Observable<boolean>;
   shoes$;
   selectedShoe$ = new BehaviorSubject({
     title: null,
@@ -28,7 +26,6 @@ export class KicksComponent implements OnInit {
 
   ngOnInit() {
     this.getShoes();
-    this.loading$ = this.facade.loading$;
   }
 
   reset() {

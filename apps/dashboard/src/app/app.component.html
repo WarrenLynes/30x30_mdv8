@@ -5,7 +5,7 @@
     </button>
   </span>
   <span class="spacer"></span>
-  <button mat-mini-fab *ngIf="authenticated | async" class="login" mat-button>
+  <button mat-mini-fab *ngIf="authenticated | async" class="login" mat-button (click)="goToCreate(); $event.stopImmediatePropagation()">
     <mat-icon>add</mat-icon>
   </button>
 </mat-toolbar>

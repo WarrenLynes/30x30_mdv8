@@ -1,8 +1,15 @@
+<mat-progress-bar
+  *ngIf="loading$ | async"
+  class="kicks-progress"
+  color="accent"
+  mode="indeterminate"
+></mat-progress-bar>
+
 <div class="container">
   <mat-card *ngFor="let kick of data$ | async">
     <mat-card-header>
       <mat-card-title>
-        <h1>{{kick.title}}</h1>
+        <h1 class="boom">{{kick.title}}</h1>
       </mat-card-title>
     </mat-card-header>
     <!--<mat-card-content>
